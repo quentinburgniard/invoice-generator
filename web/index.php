@@ -1,6 +1,7 @@
 <?php require __DIR__ . '/../vendor/autoload.php';
 
 $fields = $title = '';
+$internationalization = (object) [];
 $format = 'html';
 if (isset($_POST['fields'])) {
   $fields = $_POST['fields'];
@@ -19,13 +20,19 @@ if (!$fields) {
 if (isset($fields->invoicenumber) && isset($fields->sendername)) {
   switch ($fields->language) {
     case 'en':
-      $title = 'Invoice';
+      $internationalization->date = 'Date:';
+      $internationalization->dueDate = 'Due:';
+      $internationalization->paymentMethod = 'Payment Method';
+      $internationalization->title = 'Invoice #';
       break;
     case 'fr':
-      $title = 'Facture';
+      $internationalization->date = 'Date :';
+      $internationalization->dueDate = 'Échéance :';
+      $internationalization->paymentMethod = 'Méthode de paiement';
+      $internationalization->title = 'Facture #';
       break;
   }
-  $title = $fields->sendername . ' - ' . $title . ' #' . $fields->invoicenumber;
+  $title = $fields->sendername . ' - ' . $internationalization->title . $fields->invoicenumber;
 }
 
 $template = include '../template.php';
