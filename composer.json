@@ -1,0 +1,13 @@
+{
+  "name": "quentinburgniard/invoice",
+  "description": "Invoice PDF Generator made with Form Builder",
+  "require": {
+      "mpdf/mpdf": "^8.0.4"
+  },
+  "authors": [
+      {
+          "name": "Quentin Burgniard",
+          "email": "contact@quentinburgniard.com"
+      }
+  ]
+}
