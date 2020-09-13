@@ -1,8 +1,8 @@
-<?php return '<!doctype html>
+<?php $template = '<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>A simple, clean, and responsive HTML invoice template</title>
+    <title>' . $title . '</title>
     
     <style>
     .invoice-box {
@@ -211,3 +211,4 @@
     </div>
 </body>
 </html>';
+return $template;

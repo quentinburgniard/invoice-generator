@@ -11,11 +11,12 @@ if (isset($_GET['format'])) $format = $_GET['format'];
 if (!$fields) {
   $fields = (object) [
     'language' => 'en',
-    'sendername' => 'Sender Name'
+    'invoicenumber' => '001',
+    'sendername' => 'Sender Name',
   ];
 }
 
-if ($fields->sendername) {
+if (isset($fields->invoicenumber) && isset($fields->sendername)) {
   switch ($fields->language) {
     case 'en':
       $title = 'Invoice';
@@ -24,6 +25,7 @@ if ($fields->sendername) {
       $title = 'Facture';
       break;
   }
+  $title = $fields->sendername . ' - ' . $title . ' #' . $fields->invoicenumber;
 }
 
 $template = include '../template.php';
@@ -54,14 +56,14 @@ switch ($format) {
       'progressBar' => true
     ]);
     
-    $mpdf->SetTitle($fields->sendername . ' - ' . $title . ' #' . $fields->invoicenumber);
-    $mpdf->SetAuthor($fields->sendername);
+    $mpdf->SetTitle($title);
+    if (isset($fields->sendername)) $mpdf->SetAuthor($fields->sendername);
     $mpdf->SetSubject($title);
     $mpdf->SetDisplayMode('fullpage');
     
     $mpdf->WriteHTML($template);
     
-    $mpdf->Output($fields->prenom . '-' . $fields->nom . '-CV.pdf', 'I');
+    $mpdf->Output($title + '.pdf', 'I');
     break;
   default:
     http_response_code(404);
