@@ -11,14 +11,17 @@ if (isset($_GET['format'])) $format = $_GET['format'];
 
 if (!$fields) {
   $fields = (object) [
-    'language' => 'en',
     'invoicenumber' => '001',
     'sendername' => 'Sender Name',
   ];
 }
 
+$language = 'en';
+if (isset($fields->language)) $language = $fields->language;
+if (isset($_GET['language'])) $language = $_GET['language'];
+
 if (isset($fields->invoicenumber) && isset($fields->sendername)) {
-  switch ($fields->language) {
+  switch ($language) {
     case 'en':
       $internationalization->date = 'Date:';
       $internationalization->dueDate = 'Due:';

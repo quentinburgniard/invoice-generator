@@ -100,9 +100,9 @@
             <tr>
               <td class="title">';
               if (isset($fields->logo)):
-                $template += '<img src="' . $fields->logo . '" style="width:100%; max-width:300px;">';
+                $template .= '<img src="' . $fields->logo . '" style="width:100%; max-width:300px;">';
               endif;
-              $template += '</td>
+              $template .= '</td>
               <td>
                 ' . $internationalization->title . $fields->invoicenumber . '<br>
                 ' . $internationalization->date . ' January 1, 2015<br>
@@ -132,6 +132,7 @@
       </tr>      
       <tr class="heading">
         <td>
+          ' . $internationalization->paymentMethod . '
         </td>
         <td>
         </td>
