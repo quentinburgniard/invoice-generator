@@ -102,12 +102,17 @@
               if (isset($fields->logo)):
                 $template .= '<img src="' . $fields->logo . '" style="width:100%; max-width:300px;">';
               endif;
+              $dateFormat = 'd/m/Y';
+              $date = date_format(date_create($fields->date), $dateFormat);              
               $template .= '</td>
               <td>
                 ' . $internationalization->title . $fields->invoicenumber . '<br>
-                ' . $internationalization->date . ' January 1, 2015<br>
-                ' . $internationalization->dueDate . ' February 1, 2015
-              </td>
+                ' . $internationalization->date . ' ' . $date . '<br>';
+                if (isset($fields->dueDate)):
+                  $dueDate = date_format(date_create($fields->dueDate), $dateFormat);
+                  $template .= $internationalization->dueDate . ' ' . $dueDate;
+                endif;
+              $template .= '</td>
             </tr>
           </table>
         </td>
@@ -117,14 +122,12 @@
           <table>
             <tr>
               <td>
-                Sparksuite, Inc.<br>
-                12345 Sunny Road<br>
-                Sunnyville, CA 12345
+                ' . $fields->sendername . '<br>
+                ' . $fields->senderdetails . '
               </td>                 
               <td>
-                Acme Corp.<br>
-                John Doe<br>
-                john@example.com
+              ' . $fields->recipientname . ' <br>
+                ' . $fields->recipientdetails . '
               </td>
             </tr>
           </table>
@@ -137,34 +140,55 @@
         <td>
         </td>
       </tr>
-      <tr class="details">
-        <td>
-          Check
+      <tr class="details">';
+      if (isset($fields->paymentmethods)):
+        foreach($fields->paymentmethods as $paymentmethod):
+          $template .= '<td>
+            ' . $paymentmethod . '
+          </td>
+          <td>
+          </td>';
+        endforeach;
+      else:
+        $template .= '<td>
         </td>
         <td>
-        </td>
-      </tr>
+        </td>';
+      endif;
+      $template .= '</tr>
       <tr class="heading">
         <td>
-          Item
+        ' . $internationalization->item . '
         </td>
         <td>
-          Price
+          ' . $internationalization->price . '
         </td>
       </tr>
-      <tr class="item">
-        <td>
-          Website design
+      <tr class="item">';
+      $totalPrice = 0;
+      if (isset($fields->items)):
+        foreach($fields->items as $item):
+          $totalPrice += $item->price;
+          $template .= '<td>
+            ' . $item->item . '
+          </td>
+          <td>
+          ' . $item->price . '
+          </td>';
+        endforeach;
+      else:
+        $template .= '<td>
         </td>
         <td>
-          $300.00
-        </td>
-      </tr>
+          ' . formatNumber($fields->currency, 0) . '
+        </td>';
+      endif;
+      $template .= '</tr>
       <tr class="total">
         <td>
         </td>
         <td>
-          Total: $385.00
+          ' . $internationalization->total . ' ' . formatNumber($fields->currency, $totalPrice) . '
         </td>
       </tr>
     </table>
