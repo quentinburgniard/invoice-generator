@@ -123,11 +123,11 @@
             <tr>
               <td>
                 ' . $fields->sendername . '<br>
-                ' . $fields->senderdetails . '
+                ' . nl2br($fields->senderdetails) . '
               </td>                 
               <td>
               ' . $fields->recipientname . ' <br>
-                ' . $fields->recipientdetails . '
+                ' . nl2br($fields->recipientdetails) . '
               </td>
             </tr>
           </table>
@@ -144,7 +144,7 @@
       if (isset($fields->paymentmethods)):
         foreach($fields->paymentmethods as $paymentmethod):
           $template .= '<td>
-            ' . $paymentmethod . '
+            ' . $paymentmethod->paymentmethod . '
           </td>
           <td>
           </td>';
@@ -168,22 +168,24 @@
       $totalPrice = 0;
       if (isset($fields->items)):
         foreach($fields->items as $item):
+          if (!isset($item->item)) $item->item = 'Item';
+          if (!isset($item->price)) $item->price = 0;
           $totalPrice += $item->price;
           $template .= '<td>
             ' . $item->item . '
           </td>
           <td>
-          ' . $item->price . '
-          </td>';
+          ' . formatNumber($fields->currency, $item->price) . '
+          </td></tr>';
         endforeach;
       else:
         $template .= '<td>
         </td>
         <td>
           ' . formatNumber($fields->currency, 0) . '
-        </td>';
+        </td></tr>';
       endif;
-      $template .= '</tr>
+      $template .= '
       <tr class="total">
         <td>
         </td>
@@ -195,7 +197,7 @@
   </div>
 </body>
 <script>
-  if ("' . $format . '" == "pdf") window.print();
+  if ("' . $format . '" == "pdf" && window.top == window.self) window.print();
 </script>
 </html>';
 return $template;
