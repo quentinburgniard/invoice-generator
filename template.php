@@ -1,5 +1,5 @@
 <?php $template = '<!doctype html>
-<html>
+<html lang=' . $language . '>
 <head>
   <meta charset="utf-8">
   <title>' . $title . '</title>
@@ -194,5 +194,8 @@
     </table>
   </div>
 </body>
+<script>
+  if ("' . $format . '" == "pdf") window.print();
+</script>
 </html>';
 return $template;
