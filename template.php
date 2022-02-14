@@ -100,7 +100,7 @@
             <tr>
               <td class="title">';
               if (isset($fields->logo)):
-                $template .= '<img src="' . $fields->logo . '" style="width:100%; max-width:300px;">';
+                $template .= '<img src="' . $fields->logo . '" style="max-width:300px; max-height:150px;">';
               endif;
               $dateFormat = 'd/m/Y';
               $date = date_format(date_create($fields->date), $dateFormat);              
