@@ -64,7 +64,9 @@
     }
 
     .invoice-box table tr.notes td {
-      padding-top: 50px;
+      bottom: 38px;
+      left: 38px;
+      position: absolute;      
     }
     
     /*.invoice-box table tr.item td{
