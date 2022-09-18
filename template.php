@@ -63,8 +63,8 @@
       padding-bottom: 20px;
     }
 
-    .invoice-box table tr.notes {
-      padding-top: 20px;
+    .invoice-box table tr.notes td {
+      padding-top: 50px;
     }
     
     /*.invoice-box table tr.item td{
