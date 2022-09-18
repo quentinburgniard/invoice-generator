@@ -193,6 +193,11 @@
           ' . $internationalization->total . ' ' . formatNumber($fields->currency, $totalPrice) . '
         </td>
       </tr>
+      <tr class="notes">
+        <td>
+          ' . nl2br($fields->notes) . '
+        </td>
+      </tr>
     </table>
   </div>
 </body>
