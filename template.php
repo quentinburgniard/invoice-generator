@@ -50,7 +50,7 @@
     }
     
     .invoice-box table tr.information table td {
-      padding-bottom: 40px;
+      padding-bottom: 80px;
     }
     
     .invoice-box table tr.heading td {
