@@ -111,9 +111,9 @@
               $dateFormat = 'd/m/Y';
               $date = date_format(date_create($fields->date), $dateFormat);              
               $template .= '</td>
-              <td>
-                ' . $internationalization->title . $fields->invoicenumber . '<br>
-                ' . $internationalization->date . ' ' . $date . '<br>';
+              <td>'
+                . $internationalization->title . $fields->invoicenumber . '<br>'
+                . $internationalization->date . ' ' . $date . '<br>';
                 if (isset($fields->dueDate)):
                   $dueDate = date_format(date_create($fields->dueDate), $dateFormat);
                   $template .= $internationalization->dueDate . ' ' . $dueDate;
@@ -127,33 +127,31 @@
         <td colspan="2">
           <table>
             <tr>
-              <td>
-                ' . $fields->sendername . '<br>
-                ' . nl2br($fields->senderdetails) . '
-              </td>                 
-              <td>
-              ' . $fields->recipientname . ' <br>
-                ' . nl2br($fields->recipientdetails) . '
-              </td>
+              <td>'
+                . $fields->sendername . '<br>'
+                . nl2br($fields->senderdetails)
+              . '</td>                 
+              <td>'
+                . $fields->recipientname . '<br>'
+                . nl2br($fields->recipientdetails)
+              . '</td>
             </tr>
           </table>
         </td>
       </tr>      
       <tr class="heading">
-        <td>
-          ' . $internationalization->paymentMethod . '
-        </td>
-        <td>
-        </td>
+        <td>'
+          . $internationalization->paymentMethod
+        . '</td>
+        <td></td>
       </tr>
       <tr class="details">';
       if (isset($fields->paymentmethods)):
         foreach($fields->paymentmethods as $paymentmethod):
-          $template .= '<td>
-            ' . $paymentmethod->paymentmethod . '
-          </td>
-          <td>
-          </td>';
+          $template .= '<td>'
+            . $paymentmethod->paymentmethod
+          . '</td>
+          <td></td>';
         endforeach;
       else:
         $template .= '<td>
@@ -163,12 +161,12 @@
       endif;
       $template .= '</tr>
       <tr class="heading">
-        <td>
-        ' . $internationalization->item . '
-        </td>
-        <td>
-          ' . $internationalization->price . '
-        </td>
+        <td>'
+          . $internationalization->item
+        . '</td>
+        <td>'
+          . $internationalization->price
+        . '</td>
       </tr>
       <tr class="item">';
       $totalPrice = 0;
@@ -177,32 +175,33 @@
           if (!isset($item->item)) $item->item = 'Item';
           if (!isset($item->price)) $item->price = 0;
           $totalPrice += $item->price;
-          $template .= '<td>
-            ' . $item->item . '
-          </td>
-          <td>
-          ' . formatNumber($fields->currency, $item->price) . '
-          </td></tr>';
+          $template .= '<td>'
+            . $item->item
+          . '</td>
+          <td>'
+            . formatNumber($fields->currency, $item->price)
+          . '</td>
+      </tr>';
         endforeach;
       else:
         $template .= '<td>
         </td>
-        <td>
-          ' . formatNumber($fields->currency, 0) . '
-        </td></tr>';
+        <td>'
+          . formatNumber($fields->currency, 0)
+        . '</td>
+      </tr>';
       endif;
       $template .= '
       <tr class="total">
-        <td>
-        </td>
-        <td>
-          ' . $internationalization->total . ' ' . formatNumber($fields->currency, $totalPrice) . '
-        </td>
+        <td></td>
+        <td>'
+          . $internationalization->total . ' ' . formatNumber($fields->currency, $totalPrice)
+        . '</td>
       </tr>
       <tr class="notes">
-        <td>
-          ' . nl2br($fields->notes) . '
-        </td>
+        <td>'
+          . nl2br($fields->notes)
+        . '</td>
       </tr>
     </table>
   </div>
