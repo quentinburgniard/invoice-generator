@@ -62,10 +62,14 @@
     .invoice-box table tr.details td {
       padding-bottom: 20px;
     }
-    
-    .invoice-box table tr.item td{
-      border-bottom: 1px solid #eee;
+
+    .invoice-box table tr.notes {
+      padding-top: 20px;
     }
+    
+    /*.invoice-box table tr.item td{
+      border-bottom: 1px solid #eee;
+    }*/
     
     .invoice-box table tr.item.last td {
       border-bottom: none;
